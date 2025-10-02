@@ -1,0 +1,174 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Contoh Interface Menu Navigasi</title>
+  <style>
+    :root{
+      --bg:#0f1724; /* dark navy */
+      --card:#0b1220;
+      --accent:#06b6d4; /* teal */
+      --muted:#94a3b8;
+      --glass: rgba(255,255,255,0.04);
+    }
+    *{box-sizing:border-box}
+    body{margin:0;font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial;color:#e6eef6;background:linear-gradient(180deg,var(--bg),#061021);min-height:100vh}
+
+    /* Top navigation */
+    .topnav{
+      display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px 18px;background:linear-gradient(90deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));backdrop-filter: blur(6px);border-bottom:1px solid rgba(255,255,255,0.03);
+      position:sticky;top:0;z-index:40
+    }
+    .brand{display:flex;align-items:center;gap:12px}
+    .logo{width:40px;height:40px;border-radius:10px;background:linear-gradient(135deg,var(--accent),#7c3aed);display:flex;align-items:center;justify-content:center;font-weight:700}
+    .brand h1{font-size:16px;margin:0}
+    .nav-links{display:flex;gap:10px;align-items:center}
+    .nav-links a{color:var(--muted);text-decoration:none;padding:8px 12px;border-radius:8px}
+    .nav-links a:hover{color:#fff;background:var(--glass)}
+
+    /* Search box */
+    .search{display:flex;align-items:center;background:var(--card);padding:6px;border-radius:10px;border:1px solid rgba(255,255,255,0.03)}
+    .search input{border:0;background:transparent;color:inherit;padding:6px;outline:none;width:220px}
+
+    /* Actions */
+    .actions{display:flex;gap:8px;align-items:center}
+    .btn{padding:8px 12px;border-radius:8px;background:transparent;border:1px solid rgba(255,255,255,0.04);cursor:pointer}
+    .btn.primary{background:linear-gradient(90deg,var(--accent),#7c3aed);color:#021028;border:0}
+
+    /* Layout */
+    .container{display:grid;grid-template-columns:260px 1fr;gap:18px;max-width:1100px;margin:24px auto;padding:0 12px}
+
+    /* Sidebar */
+    .sidebar{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));padding:14px;border-radius:12px;min-height:420px;border:1px solid rgba(255,255,255,0.03)}
+    .menu{list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:6px}
+    .menu li a{display:flex;gap:10px;align-items:center;padding:10px;border-radius:8px;color:var(--muted);text-decoration:none}
+    .menu li a:hover{background:var(--glass);color:#fff}
+    .menu .active{background:linear-gradient(90deg, rgba(6,182,212,0.12), rgba(124,58,237,0.07));color:#fff}
+
+    /* Content card */
+    .content{padding:14px;border-radius:12px;background:linear-gradient(180deg, rgba(255,255,255,0.015), rgba(255,255,255,0.01));border:1px solid rgba(255,255,255,0.03);min-height:420px}
+
+    /* Responsive */
+    .hamburger{display:none;background:transparent;border:0;font-size:20px;color:var(--muted);cursor:pointer}
+    @media (max-width:880px){
+      .container{grid-template-columns:1fr;}
+      .sidebar{position:fixed;left:-320px;top:68px;width:260px;z-index:60;height:calc(100vh - 80px);transition:left .22s ease}
+      .sidebar.open{left:12px}
+      .hamburger{display:inline-block}
+      .search input{width:120px}
+    }
+
+    /* Dropdown */
+    .profile{position:relative}
+    .dropdown{position:absolute;right:0;top:44px;background:var(--card);padding:8px;border-radius:8px;min-width:160px;border:1px solid rgba(255,255,255,0.03);display:none}
+    .dropdown a{display:block;padding:8px;border-radius:6px;color:var(--muted);text-decoration:none}
+    .dropdown a:hover{background:var(--glass);color:#fff}
+    .profile.open .dropdown{display:block}
+
+    /* small helpers */
+    small{color:var(--muted)}
+  </style>
+</head>
+<body>
+  <header class="topnav">
+    <div class="brand">
+      <button class="hamburger" id="hamburger" aria-label="Toggle menu">☰</button>
+      <div class="logo">NB</div>
+      <div>
+        <h1>Nama Situs</h1>
+        <small>Dashboard &amp; Navigasi</small>
+      </div>
+    </div>
+
+    <nav class="nav-links" aria-label="Primary">
+      <div class="search" role="search">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M21 21l-4.35-4.35" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path><circle cx="11" cy="11" r="6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></circle></svg>
+        <input type="search" placeholder="Cari..." aria-label="Cari" />
+      </div>
+
+      <a href="#">Home</a>
+      <a href="#">Produk</a>
+      <a href="#">Laporan</a>
+    </nav>
+
+    <div class="actions">
+      <button class="btn">Bantuan</button>
+      <div class="profile" id="profile">
+        <button class="btn" id="profileBtn">Stefan ▾</button>
+        <div class="dropdown" role="menu" aria-hidden="true">
+          <a href="#">Profil</a>
+          <a href="#">Pengaturan</a>
+          <a href="#">Keluar</a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+    <aside class="sidebar" id="sidebar" aria-label="Sidebar navigasi">
+      <ul class="menu">
+        <li><a href="#" class="active">🏠 Dashboard</a></li>
+        <li><a href="#">📦 Produk</a></li>
+        <li><a href="#">🧾 Penjualan</a></li>
+        <li><a href="#">📈 Laporan</a></li>
+        <li><a href="#">⚙️ Pengaturan</a></li>
+        <li><a href="#">❓ Bantuan</a></li>
+      </ul>
+    </aside>
+
+    <section class="content" id="content">
+      <h2>Selamat datang, Stefan!</h2>
+      <p>Ini contoh template sederhana untuk interface menu navigasi. Menu ini responsif: pada layar sempit, klik tombol ☰ untuk membuka sidebar.</p>
+
+      <div style="margin-top:18px;display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px">
+        <div style="padding:12px;border-radius:10px;background:var(--glass);border:1px solid rgba(255,255,255,0.02)">
+          <h3>Ringkasan</h3>
+          <p>Item: <strong>24</strong></p>
+        </div>
+        <div style="padding:12px;border-radius:10px;background:var(--glass);border:1px solid rgba(255,255,255,0.02)">
+          <h3>Pengunjung</h3>
+          <p>Hari ini: <strong>153</strong></p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    // Toggle sidebar for small screens
+    const hamburger = document.getElementById('hamburger');
+    const sidebar = document.getElementById('sidebar');
+    hamburger.addEventListener('click', ()=>{
+      sidebar.classList.toggle('open');
+    });
+
+    // Profile dropdown
+    const profile = document.getElementById('profile');
+    const profileBtn = document.getElementById('profileBtn');
+    profileBtn.addEventListener('click', (e)=>{
+      e.stopPropagation();
+      profile.classList.toggle('open');
+      const dd = profile.querySelector('.dropdown');
+      dd.setAttribute('aria-hidden', profile.classList.contains('open') ? 'false' : 'true');
+    });
+    // Close dropdown or sidebar when clicking outside
+    document.addEventListener('click', (e)=>{
+      if(!profile.contains(e.target)){
+        profile.classList.remove('open');
+        profile.querySelector('.dropdown').setAttribute('aria-hidden','true');
+      }
+      if(!sidebar.contains(e.target) && window.innerWidth <= 880){
+        sidebar.classList.remove('open');
+      }
+    });
+
+    // Keyboard accessibility: close on Escape
+    document.addEventListener('keydown', (e)=>{
+      if(e.key === 'Escape'){
+        sidebar.classList.remove('open');
+        profile.classList.remove('open');
+      }
+    });
+  </script>
+</body>
+</html>
