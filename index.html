@@ -5,85 +5,81 @@
   <title>Teknologi Edukasi - Arduino</title>
   <style>
     body { font-family: Arial, sans-serif; margin:0; line-height:1.6; }
-    header { background:#0074D9; color:#fff; padding:16px 20px; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; }
-    header h1 { margin:0; font-size:1.5rem; }
+    header {
+  background:#0074D9;
+  color:#fff;
+  padding:16px 20px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  flex-wrap:wrap;
+  position: relative; /* biar nav bisa absolute */
+}
 
-    nav {
-  display: flex;
-  gap: 15px;
-  justify-content: flex-end; /* pindah ke kanan */
+.menu-toggle {
+  display:none;
+  background:none;
+  border:none;
+  font-size:1.8rem;
+  color:#fff;
+  cursor:pointer;
+  z-index:999; /* tombol ga ketiban nav */
+}
+
+nav {
+  display:flex;
+  gap:15px;
+  justify-content:flex-end;
 }
 
 nav a {
-  color: #fff;
-  text-decoration: none;
-  font-weight: 600;
-  padding: 6px 12px;       /* kasih jarak biar enak diklik */
-  border-radius: 6px;
-  background: transparent; /* default tanpa background */
-  transition: 0.3s;
+  color:#fff;
+  text-decoration:none;
+  font-weight:600;
+  padding:6px 12px;
+  border-radius:6px;
+  transition:0.3s;
 }
 
 nav a:hover {
-  background: rgba(255,255,255,0.2); /* background cuma di teks */
+  background:rgba(255,255,255,0.2);
 }
-
 
 @media (max-width:768px) {
   nav {
-    flex-direction: column;
-    align-items: flex-end; /* menu ke kanan di mobile */
+    flex-direction:column;
+    align-items:flex-start;
+    background:#0074D9;
+    position:absolute;
+    top:60px;  /* turun dari header */
+    right:0;
+    width:200px;
+    overflow:hidden;
+    max-height:0;
+    transition:max-height 0.4s ease;
   }
 
-  nav a {
-    display: inline-block;  /* background cuma di teks */
-    margin: 5px 0;
+  nav.show {
+    max-height:300px;
+  }
+
+  .menu-toggle {
+    display:block;
   }
 }
-
-    .menu-toggle { display:none; background:none; border:none; font-size:1.8rem; color:#fff; cursor:pointer; }
-
-    main { padding:20px; max-width:1100px; margin:auto; }
-    .content { display:grid; grid-template-columns: 2fr 1fr; gap:20px; }
-    article { background:#f9f9f9; padding:15px; border-radius:8px; }
-    article h2 { margin-top:0; }
-    figure { margin:0; }
-    img { max-width:100%; height:auto; border-radius:8px; }
-
-    section { margin-top:25px; }
-    .table-wrapper { overflow-x:auto; }
-    table { border-collapse:collapse; width:100%; }
-    th, td { border:1px solid #ddd; padding:10px; text-align:left; }
-    th { background:#eee; }
-
-    footer { background:#f1f1f1; padding:14px; text-align:center; color:#444; margin-top:30px; }
-
-    @media (max-width:768px) {
-      .content { grid-template-columns:1fr; }
-      nav { 
-        flex-direction:column; 
-        background:#0074D9;
-        width:100%;
-        overflow:hidden;
-        max-height:0;
-        transition:max-height 0.4s ease;
-      }
-      nav.show { max-height:300px; }
-      .menu-toggle { display:block; }
-    }
   </style>
 </head>
 <body>
 
   <header>
-    <h1>Teknologi Edukasi</h1>
-    <button class="menu-toggle" aria-label="Buka menu">☰</button>
-    <nav>
-      <a href="#home">Home</a>
-      <a href="#galeri">Galeri</a>
-      <a href="#kontak">Kontak</a>
-    </nav>
-  </header>
+  <h1>Teknologi Edukasi</h1>
+  <button class="menu-toggle" aria-label="Buka menu">☰</button>
+  <nav>
+    <a href="#home">Home</a>
+    <a href="#galeri">Galeri</a>
+    <a href="#kontak">Kontak</a>
+  </nav>
+</header>
 
   <main id="home">
     <div class="content">
