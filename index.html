@@ -1,8 +1,5 @@
 <!doctype html>
-<html lang="id">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Teknologi Edukasi - Arduino</title>
   <style>
     body {
@@ -29,7 +26,6 @@
       font-size: 1.5rem;
     }
 
-    /* Tombol ☰ */
     .menu-toggle {
       display: none;
       background: none;
@@ -56,15 +52,13 @@
       background: #555;
     }
 
-    /* Smooth scroll */
     html {
       scroll-behavior: smooth;
     }
 
-    /* Responsive */
     @media (max-width: 768px) {
       .menu-toggle {
-        display: block; /* tampil di HP */
+        display: block;
       }
 
       nav {
@@ -72,7 +66,7 @@
         background: #444;
         position: fixed;
         top: 0;
-        right: -220px; /* posisi awal sembunyi */
+        right: -220px;
         height: 100%;
         width: 200px;
         padding-top: 60px;
@@ -88,7 +82,6 @@
         color: #fff;
       }
 
-      /* Tombol ✖ di dalam menu */
       .close-menu {
         position: absolute;
         top: 15px;
@@ -101,7 +94,7 @@
       }
 
       nav.active {
-        right: 0; /* geser masuk */
+        right: 0; 
       }
     }
 
@@ -115,13 +108,6 @@
       display: grid;
       grid-template-columns: 2fr 1fr;
       gap: 20px;
-    }
-
-    article {
-      background: #fff;
-      padding: 15px;
-      border-radius: 8px;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
     }
 
     article h2 {
@@ -195,25 +181,17 @@
   </header>
 
   <main>
-    <!-- Home -->
     <section id="home">
-      <div class="content">
         <article>
           <h2>Pengenalan Arduino</h2>
-          <p>
-            Arduino adalah platform elektronik open-source yang populer digunakan untuk membuat berbagai proyek otomatisasi dan Internet of Things (IoT). 
-            Dengan mikrokontroler dan bahasa pemrograman sederhana, Arduino memungkinkan siapa saja, baik pemula maupun profesional, untuk mengembangkan prototipe perangkat pintar.
-          </p>
-          <p>
-            Arduino dapat diprogram untuk mengendalikan LED, sensor, motor, hingga terhubung ke internet. Platform ini sering digunakan dalam bidang pendidikan, riset, dan juga industri kreatif karena fleksibilitas serta komunitasnya yang besar.
-          </p>
+          <p>Arduino adalah platform elektronik open-source yang populer digunakan untuk membuat berbagai proyek otomatisasi dan Internet of Things (IoT). 
+             Dengan mikrokontroler dan bahasa pemrograman sederhana, Arduino memungkinkan siapa saja, baik pemula maupun profesional, untuk mengembangkan prototipe perangkat pintar.</p>
+          <p>Arduino dapat diprogram untuk mengendalikan LED, sensor, motor, hingga terhubung ke internet. Platform ini sering digunakan dalam bidang pendidikan, riset, dan juga industri kreatif karena fleksibilitas serta komunitasnya yang besar.</p>
         </article>
-      </div>
     </section>
 
-    <!-- Galeri -->
     <section id="galeri">
-      <h2>Galeri Arduino</h2>
+      <h2>Jenis Arduino</h2>
       <figure>
         <img src="arduino-uno.png" alt="Arduino Uno" width="300">
         <figcaption>Arduino Uno</figcaption>
@@ -226,7 +204,6 @@
       </figure>
     </section>
 
-    <!-- Tabel -->
     <section id="tabel">
       <h3>Perbandingan Board Arduino</h3>
       <div class="table-wrapper">
@@ -263,7 +240,6 @@
       </div>
     </section>
 
-    <!-- Kontak -->
     <section id="kontak">
       <h2>Kontak</h2>
       <p><strong>Email:</strong> stefanuskrisna@gmail.com</p>
@@ -271,25 +247,24 @@
     </section>
   </main>
 
-  <footer>
-    <p>&copy; <span id="tahun"></span> Teknologi Edukasi</p>
-  </footer>
-
   <script>
     const toggle = document.querySelector(".menu-toggle");
     const nav = document.querySelector("nav");
     const closeBtn = document.querySelector(".close-menu");
     const navLinks = document.querySelectorAll("nav a");
 
+    // buka menu
     toggle.addEventListener("click", () => {
-      nav.classList.toggle("active");
+      nav.classList.add("active");
+      toggle.style.display = "none";
     });
 
+    // tutup menu
     closeBtn.addEventListener("click", () => {
       nav.classList.remove("active");
+      toggle.style.display = "block";
     });
 
-    // Smooth scroll + auto close menu
     navLinks.forEach(link => {
       link.addEventListener("click", (e) => {
         e.preventDefault();
@@ -299,11 +274,9 @@
           target.scrollIntoView({ behavior: "smooth" });
         }
         nav.classList.remove("active");
+        toggle.style.display = "block";
       });
     });
-
-    // Tahun otomatis
-    document.getElementById("tahun").textContent = new Date().getFullYear();
   </script>
 </body>
 </html>
