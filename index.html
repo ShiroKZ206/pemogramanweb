@@ -1,103 +1,90 @@
 <!doctype html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8">
-  <title>Teknologi Edukasi - Arduino</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Teknologi Edukasi</title>
   <style>
-    body { font-family: Arial, sans-serif; margin:0; line-height:1.6; }
-    
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background: #f5f5f5;
+    }
+
     header {
-      background:#0074D9;
-      color:#fff;
-      padding:16px 20px;
-      display:flex;
-      justify-content:space-between;
-      align-items:center;
-      flex-wrap:wrap;
+      background: #333;
+      color: #fff;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 20px;
       position: relative;
     }
-    header h1 { margin:0; font-size:1.5rem; }
 
+    header h1 {
+      margin: 0;
+      font-size: 1.5rem;
+    }
+
+    /* Tombol ☰ */
     .menu-toggle {
-      display:none;
-      background:none;
-      border:none;
-      font-size:1.8rem;
-      color:#fff;
-      cursor:pointer;
-      z-index:999; /* tombol ga ketiban nav */
+      display: none;
+      background: none;
+      border: none;
+      font-size: 1.8rem;
+      color: #fff;
+      cursor: pointer;
+      z-index: 1000; /* biar ga ketiban */
     }
 
     nav {
-      display:flex;
-      gap:15px;
-      justify-content:flex-end;
+      display: flex;
+      gap: 15px;
     }
 
     nav a {
-      color:#fff;
-      text-decoration:none;
-      font-weight:600;
-      padding:6px 12px;
-      border-radius:6px;
-      transition:0.3s;
+      color: #fff;
+      text-decoration: none;
+      padding: 8px 12px;
+      border-radius: 5px;
     }
+
     nav a:hover {
-      background:rgba(255,255,255,0.2);
+      background: #555;
     }
 
-    /* ===== MOBILE MENU ===== */
-    @media (max-width:768px) {
-    nav {
-    flex-direction:column;
-    align-items:flex-start;
-    background:#0074D9;
-    position:absolute;
-    top:60px;   /* turun dari header */
-    right:0;
-    width:200px;
-    overflow:hidden;
+    /* Responsive */
+    @media (max-width: 768px) {
+      .menu-toggle {
+        display: block; /* tampil di HP */
+      }
 
-    /* animasi */
-    max-height:0;
-    opacity:0;
-    transform: translateY(-10px);
-    transition: all 0.4s ease;
-    }
-    nav.show {
-    max-height:500px;
-    opacity:1;
-    transform: translateY(0);
-    }
+      nav {
+        display: none;
+        flex-direction: column;
+        background: #444;
+        position: absolute;
+        top: 60px;
+        right: 20px;
+        width: 150px;
+        border-radius: 8px;
+        overflow: hidden;
+      }
 
-    .menu-toggle {
-      display:block;
-    }
-  }
+      nav a {
+        text-align: center;
+        padding: 12px;
+        border-bottom: 1px solid #555;
+      }
 
-    /* ===== CONTENT ===== */
-    main { padding:20px; max-width:1100px; margin:auto; }
-    .content { display:grid; grid-template-columns: 2fr 1fr; gap:20px; }
-    article { background:#f9f9f9; padding:15px; border-radius:8px; }
-    article h2 { margin-top:0; }
-    figure { margin:0; text-align:center; }
-    img { max-width:100%; height:auto; border-radius:8px; }
-
-    section { margin-top:25px; }
-    .table-wrapper { overflow-x:auto; }
-    table { border-collapse:collapse; width:100%; }
-    th, td { border:1px solid #ddd; padding:10px; text-align:left; }
-    th { background:#eee; }
-
-    footer { background:#f1f1f1; padding:14px; text-align:center; color:#444; margin-top:30px; }
-
-    @media (max-width:768px) {
-      .content { grid-template-columns:1fr; }
+      nav.active {
+        display: flex;
+      }
     }
   </style>
 </head>
 <body>
-
   <header>
     <h1>Teknologi Edukasi</h1>
     <button class="menu-toggle" aria-label="Buka menu">☰</button>
@@ -107,6 +94,16 @@
       <a href="#kontak">Kontak</a>
     </nav>
   </header>
+
+  <script>
+    const toggle = document.querySelector(".menu-toggle");
+    const nav = document.querySelector("nav");
+    toggle.addEventListener("click", () => {
+      nav.classList.toggle("active");
+    });
+  </script>
+</body>
+</html>
 
   <main id="home">
     <div class="content">
